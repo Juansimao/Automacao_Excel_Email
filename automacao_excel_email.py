@@ -36,3 +36,33 @@ print(f"Relatório semanal dos painéis reparados, segue a lista: \n")
 
 for _, row in relatorio.iterrows():
     print(f"{row['Modelo']} = {int(row['Q saída'])} gabinetes")
+
+
+
+#---------------- Parte Email ----------------#
+
+assunto = f"Itens devolvidos ao estoque do dia {segunda.strftime('%d/%m/%Y')} até o dia {sexta.strftime('%d/%m/%Y')}"
+
+corpo_mensagem =  f"Segue relação de painéis devolvidos ao estoque do dia – \n\n" + "\n".join(
+[f"{row['Modelo']} - {int(row['Q saída'])} gabinetes" for _, row in relatorio.iterrows()]),"\n \nAtenciosamente, Manutenção!"
+
+
+destinatario = ["Email destino"]
+
+#Armanezamento do login
+
+remetente = "*********@gmail.com"
+senha = "senha"
+
+#funções da biblioteca 
+
+msg = MIMEText(corpo_mensagem)
+msg['Subject'] = assunto
+msg['From'] = remetente
+msg['To'] = ', '.join(destinatario)
+
+#conexão com o servidor do gmail
+with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+  smtp_server.login(remetente, senha)
+  smtp_server.sendmail(remetente, destinatario, msg.as_string())
+print("Mensagem enviada!")
