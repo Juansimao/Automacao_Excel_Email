@@ -3,6 +3,13 @@ import smtplib
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 
+print("Vamos enviar um email com os dados do relatório semanal sobre os painéis de LED\n")
+
+#criação de uma entrada de dados que precisa ser preenchida manualmente 
+painel_pl2_5 = int(input("Digite a quantide de módulos do pl 2.5mm:\n"))
+
+#criação de uma segunda entrada de dados que precisa ser preenchida manualmente 
+painel_pl2_5c = int(input("Digite a quantide de módulos do pl 2.5mm C:\n"))
 
 # Minha planilha
 arquivo = r"C:\Users\juanf\OneDrive\Documentos\excel\exceltestes.xlsx"            
